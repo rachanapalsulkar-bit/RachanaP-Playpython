@@ -1,0 +1,27 @@
+# Print name, age, and boolean
+name = "Rachana"
+age = 25
+is_working = True
+print("Name:", name)
+print("Age:", age)
+print("Is Working:", is_working)   
+
+
+
+#Create username and password and print it
+username = "Rachana"
+password = "Uknowwhat!"
+print("Username:", username)
+print("Password:", password)
+
+
+
+
+#Print with taking input from user
+name=input("Enter your name: ")
+Job_Experience=input("Enter your job experience: ")
+is_working=input("Are you still working? (yes/no): ")
+print ("Name: " + name)
+print ("Job Experience:  " + Job_Experience)
+print ("Is still Working:  " + is_working)
+
