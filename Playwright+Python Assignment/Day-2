@@ -1,0 +1,85 @@
+#Load product data from JSON file
+import json
+from unittest import result
+
+with open(r"C:\Users\rachana.palsulkar\Documents\products.json") as file:
+    products = json.load(file)
+
+print(products)
+
+#Modify login to handle incorrect input via exceptions
+
+def login(username, password):
+    try:
+        if username == "root" and password == "redhat":
+            print("Login Successful")
+        else:
+            raise ValueError("Invalid Credentials")
+    except ValueError as e:
+        print(e)
+    
+    # Examples
+login("root", "redhat")
+login("root", "wrong")
+
+
+#Build Login class with validation method
+class Login:
+    def validate(self, username, password):
+        if username == "root" and password == "redhat":
+            print("Login Successful")
+        else:
+            print("Login Failed")
+            
+# Example
+login = Login()
+
+login.validate("root", "redhat")
+login.validate("user", "1111")
+
+#Create reusable login module
+def login(username, password):
+    login_instance = Login()
+    login_instance.validate(username, password)
+# Example
+login("root", "redhat")
+login("user", "1111")
+
+# login_module.py
+
+def login(username, password):
+    valid_user = "root"
+    valid_pass = "redhat"
+
+    if username == valid_user and password == valid_pass:
+        return "Login Successful"
+    else:
+        return "Login Failed"
+
+# main.py (we can use login module in another file)
+#from login_module import login
+#result = login("root", "redhat")
+#print(result)
+
+
+
+#Call GET API and print response
+import requests
+response = requests.get("https://demoqa.com")
+print(response.status_code)
+print(response.text)
+
+# Sample list of products (each product is a dictionary)
+products = [
+    {"name": "iphone", "price": 30},
+    {"name": "charger", "price": 80},
+    {"name": "earpods", "price": 10},
+]
+
+# Filter products with price < 50
+cheap_products = [p for p in products if p["price"] < 50]
+
+# Print results
+for product in cheap_products:
+    print(product["name"], "-", product["price"])
+
