@@ -1,0 +1,51 @@
+from playwright.sync_api import sync_playwright
+
+class LoginPage:
+    def __init__(self, page):
+        self.page = page
+        self.user = "#user-name"
+        self.pwd = "#password"
+        self.btn = "#login-button"
+
+    def login(self, u, p):
+        self.page.fill(self.user, u)
+        self.page.fill(self.pwd, p)
+        self.page.click(self.btn)
+
+
+with sync_playwright() as p:
+    page = p.chromium.launch(headless=False).new_page()
+    page.goto("https://www.saucedemo.com")
+
+    login = LoginPage(page)
+    login.login("standard_user", "secret_sauce")
+
+    assert "inventory" in page.url
+    print("Login successful")
+    page.wait_for_timeout(3000)
+    ###Verify Product Count###
+    count = page.locator(".inventory_item").count()
+    assert count >= 6
+    print("Products Available:", count)
+    page.wait_for_timeout(3000)
+    page.wait_for_url("**/inventory.html")
+    page.click("#add-to-cart-sauce-labs-backpack")
+    page.click("#add-to-cart-sauce-labs-bike-light")
+    assert page.locator(".shopping_cart_badge").text_content() == "2"
+    print("2 Product Added")
+    page.wait_for_timeout(4000)
+    page.click("#remove-sauce-labs-backpack")
+    assert page.locator(".shopping_cart_badge").count() == 1
+    page.wait_for_timeout(4000)
+    print("1 Product Removed")
+    page.wait_for_timeout(4000)
+    assert page.locator(".shopping_cart_badge").count() == 1
+    print("Cart has 1 Product")
+    print(page.url)
+    print(page.title())
+    page.fill("#user-name", "standard_user")
+    page.fill("#password", "secret_sauce")
+    page.click("#logout-button")
+
+    print("Checkout Details Entered")
+    
