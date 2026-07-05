@@ -1,0 +1,22 @@
+# Login
+user = input("Username: ")
+pwd = input("Password: ")
+
+if user == "root" and pwd == "redhat":
+    products = {"School Bag": 800, "Compass": 150, "Water Bottle": 300, "Lunch Box": 500}
+
+    print("Products:", products)
+
+    item = input("Enter product name: ")
+
+    if item in products:
+        cart = [item]
+        total = products[item]
+
+        print("Cart:", cart)
+        print("Total Amount:", total)
+        print("Checkout Successful")
+    else:
+        print("Product not found")
+else:
+    print("Invalid Login")
