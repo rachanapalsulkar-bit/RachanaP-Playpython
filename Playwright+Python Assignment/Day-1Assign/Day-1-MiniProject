@@ -1,0 +1,32 @@
+# Login Validation
+valid_username = "root"
+valid_password = "redhat"
+
+username = input("Enter username: ")
+password = input("Enter password: ")
+
+if username == valid_username and password == valid_password:
+    print("Login Successful!")
+
+    # Store Cart Items
+    cart = []
+    while True:
+        item = input("Enter item to add to cart (or 'done' to finish): ")
+        if item.lower() == "done":
+            break
+        cart.append(item)
+
+    # Display Cart
+    print("Items in Cart:")
+    for item in cart:
+        print("-", item)
+
+    # Simulate Checkout
+    if len(cart) > 0:
+        print("Proceeding to Checkout...")
+        print("Order placed successfully!")
+    else:
+        print("Cart is empty. Cannot checkout.")
+
+else:
+    print("Invalid Username or Password!")
