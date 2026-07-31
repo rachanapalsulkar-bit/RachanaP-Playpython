@@ -1,0 +1,17 @@
+﻿from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)
+    page = browser.new_page()
+    page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login', wait_until='domcontentloaded')
+    print('initial url', page.url)
+    print('status', page.evaluate('document.readyState'))
+    page.fill('input[name="username"]', 'wronguser')
+    page.fill('input[name="password"]', 'wrongpass')
+    page.click('button[type="submit"]')
+    page.wait_for_timeout(5000)
+    print('after submit url', page.url)
+    error_locator = page.locator('p.oxd-text.oxd-text--p.oxd-alert-content-text')
+    print('error count', error_locator.count())
+    print('error texts', error_locator.all_text_contents())
+    print('body text snippet', page.locator('body').inner_text()[:500])
+    browser.close()
