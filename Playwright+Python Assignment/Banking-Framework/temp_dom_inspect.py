@@ -1,0 +1,20 @@
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    page = browser.new_page()
+    page.goto('https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login')
+    page.wait_for_load_state('networkidle')
+    page.click('button:has-text("Customer Login")')
+    page.wait_for_timeout(1000)
+    print('TITLE:', page.title())
+    print('URL:', page.url)
+    print('BUTTON COUNT:', page.locator('button').count())
+    print('CUSTOMER BUTTON COUNT:', page.locator('button:has-text("Customer Login")').count())
+    print('LOGIN BUTTON COUNT:', page.locator('button:has-text("Login")').count())
+    print('SELECT COUNT (old selector):', page.locator('select[ng-model="Your Name"]').count())
+    print('SELECT COUNT (custId):', page.locator('select[ng-model="custId"]').count())
+    select = page.locator('select[ng-model="custId"]')
+    print('OPTIONS:', [select.locator('option').nth(i).text_content() for i in range(select.locator('option').count())])
+    print('HTML SNIPPET:', page.content()[:2000])
+    browser.close()
