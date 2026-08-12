@@ -14,9 +14,6 @@ password = "Uknowwhat!"
 print("Username:", username)
 print("Password:", password)
 
-
-
-
 #Print with taking input from user
 name=input("Enter your name: ")
 Job_Experience=input("Enter your job experience: ")

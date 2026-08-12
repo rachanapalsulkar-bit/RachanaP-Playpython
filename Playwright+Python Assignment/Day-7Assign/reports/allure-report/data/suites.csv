@@ -1,0 +1,3 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"broken","Thu Jul 16 16:17:05 IST 2026","Thu Jul 16 16:17:05 IST 2026","0","","test_example","","","","test_saucedemo_title",""
+"passed","Fri Jul 17 17:13:50 IST 2026","Fri Jul 17 17:13:51 IST 2026","368","","test_example","","","","test_saucedemo_title[chromium]",""
